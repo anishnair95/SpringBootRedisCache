@@ -1,0 +1,29 @@
+spring:
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+  datasource:
+    username: root
+    password: password
+    url: jdbc:mysql://localhost:3307/javatechie?createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    cache-names: productCache  # this name will be used as prefix in redis cache
+    type: redis   #Spring boot intelligent enough to auto recognize cache based on configuration
+    redis:
+      time-to-live: 65s
+      cache-null-values: false
+      key-prefix: productCache    #Key is necessary if the same redis server used by multiple applications.
+                                #So to avoid any collision we can keep unique prefixes rediscacheproductCache
+      use-key-prefix: true
+
+server:
+  port: 9191
